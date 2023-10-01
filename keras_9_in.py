@@ -58,7 +58,8 @@ def test_network():
     print(y_test)
 
     classifier = Sequential()
-    classifier.add(tf.keras.layers.Dense(units=9, activation='relu', input_dim=9))
+    classifier.add(tf.keras.layers.Dense(units=9, activation='relu'))
+    classifier.add(tf.keras.layers.Dense(units=9, activation='relu'))
     classifier.add(tf.keras.layers.Dense(units=1, activation='relu'))
 
     classifier.compile(optimizer='RMSprop', loss='binary_crossentropy')
@@ -91,4 +92,4 @@ def test_network():
 if __name__ == "__main__":
     # test_network()
     classifier_loaded = keras.models.load_model("model_1")
-    print(classifier_loaded.get_weights())
+    print(classifier_loaded.layers[0].get_weights())
