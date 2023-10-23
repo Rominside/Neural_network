@@ -32,7 +32,7 @@ module Network (
 
                       .input_0(input_0),  .input_1(input_1),  .input_2(input_2),  .input_3(input_3),  .input_4(input_4),
                       .input_5(input_5),  .input_6(input_6),  .input_7(input_7),  .input_8(input_8),
-                      .start_(), .out(out_0[i]), .end_(end_2));
+                      .start_(start), .out(out_0[i]), .end_(end_0));
         end
     endgenerate
     //--------------------Layer_1------------------------
@@ -48,7 +48,7 @@ module Network (
 
                       .input_0(out_0[0]),  .input_1(out_0[1]),  .input_2(out_0[2]),  .input_3(out_0[3]),  .input_4(out_0[4]),
                       .input_5(out_0[5]),  .input_6(out_0[6]),  .input_7(out_0[7]),  .input_8(out_0[8]),
-                      .start_(), .out(out_1[i]), .end_(end_2));
+                      .start_(end_0), .out(out_1[i]), .end_(end_1));
         end
     endgenerate
     //--------------------Layer_2------------------------
@@ -60,7 +60,7 @@ module Network (
 
                       .input_0(out_1[0]),  .input_1(out_1[1]),  .input_2(out_1[2]),  .input_3(out_1[3]),  .input_4(out_1[4]),
                       .input_5(out_1[5]),  .input_6(out_1[6]),  .input_7(out_1[7]),  .input_8(out_1[8]),
-                      .start_(), .out(out_2), .end_(end_2));
+                      .start_(end_1), .out(out_2), .end_(end_2));
 
    initial begin
    //-------------WEIGHT_2-----------
@@ -240,7 +240,6 @@ module Network (
 		weight_0[8][6] =  24040818;
 		weight_0[8][7] =  11675864;
 		weight_0[8][8] =  20305991;
-
    end
 
 endmodule

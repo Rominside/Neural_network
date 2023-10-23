@@ -5,7 +5,7 @@ import tensorflow as tf
 import numpy as np
 
 
-def test_network():
+def preparing_data():
     dataset_train = pd.read_csv("Train.txt", sep=",", header=None)
     dataset_test = pd.read_csv("Test.txt", sep=",", header=None)
 
@@ -51,27 +51,21 @@ def test_network():
     x_test = dataset_test.iloc[:, 0:9]
     y_test = dataset_test.iloc[:, 9:10]
 
-    print(pd.unique(y_train[41]))
-    print(pd.unique(x_train[1]))
-    print(pd.unique(x_train[2]))
-    print(pd.unique(x_train[3]))
-    print(y_test)
+    return {"x_train": x_train, "y_train": y_train, "x_test": x_test, "y_test": y_test}
 
-    classifier = Sequential()
-    classifier.add(tf.keras.layers.Dense(units=9, activation='relu'))
-    classifier.add(tf.keras.layers.Dense(units=9, activation='relu'))
-    classifier.add(tf.keras.layers.Dense(units=1, activation='relu'))
 
-    classifier.compile(optimizer='RMSprop', loss='binary_crossentropy')
+def generate_network(x_train, y_train, x_test, y_test):
+    classifier_ = Sequential()
+    classifier_.add(tf.keras.layers.Dense(units=9, activation='relu'))
+    classifier_.add(tf.keras.layers.Dense(units=9, activation='relu'))
+    classifier_.add(tf.keras.layers.Dense(units=1, activation='relu'))
+
+    classifier_.compile(optimizer='RMSprop', loss='binary_crossentropy')
     y_train = y_train.values.astype(float)
-    # x_train = x_train.values.astype(float)
-    classifier.fit(x=x_train, y=y_train, batch_size=1, epochs=3)
+    x_train = x_train.values.astype(float)
+    classifier_.fit(x=x_train, y=y_train, batch_size=1, epochs=3)
 
-    classifier.save("model_1")
-    classifier_loaded = keras.models.load_model("model_1")
-    classifier_loaded.evaluate(x_test, y_test)
-
-    y_pred = classifier.predict(x_test)
+    y_pred = classifier_.predict(x_test)
     y_pred = [1 if y >= 0.5 else 0 for y in y_pred]
 
     total = 0
@@ -88,8 +82,19 @@ def test_network():
     print("Correct " + str(correct))
     print("Wrong " + str(wrong))
 
+    return classifier
+
+
+def save_network(classifier_):
+    classifier_.save("model_1")
+    classifier_loaded_ = keras.models.load_model("model_1")
+    classifier_loaded_.evaluate(x_test, y_test)
+
 
 if __name__ == "__main__":
-    # test_network()
-    classifier_loaded = keras.models.load_model("model_1")
-    print(classifier_loaded.layers[0].get_weights())
+    # подготовка данных
+    data = preparing_data()
+    # создание, обучение и проверка модели
+    classifier = generate_network(data["x_train"], data["y_train"], data["x_test"], data["y_test"])
+    # сохранение модели
+    save_network(classifier)
