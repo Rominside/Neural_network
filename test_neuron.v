@@ -3,9 +3,9 @@
 module test_neuron();
     reg clk;
     reg start_;
-    reg signed [32:0] inputs [8:0];
+    reg signed [99:0] inputs [8:0];
     reg signed [32:0] weight [8:0];
-    wire signed [33:0] out;
+    wire signed [99:0] out;
     wire end_;
 
     always #10 begin
@@ -25,25 +25,25 @@ module test_neuron();
     initial begin
         clk = 0;
         start_ = 1;
-        inputs[0] = 1;
-        inputs[1] = 2;
-        inputs[2] = 3;
-        inputs[3] = 4;
-        inputs[4] = 5;
-        inputs[5] = 6;
-        inputs[6] = 7;
-        inputs[7] = 8;
-        inputs[8] = 9;       
+        inputs[0] = 0;
+    inputs[1] = 0;
+    inputs[2] = 4;
+    inputs[3] = 1;
+    inputs[4] = 294;
+    inputs[5] = 6442;
+    inputs[6] = 0;
+    inputs[7] = 0;
+    inputs[8] = 0;
         //------weight-----
-        weight[0] = 14264025;
-        weight[1] = 20602356;
-        weight[2] = 62294483;
-        weight[3] = -5274598;
-        weight[4] = 61604893;
-        weight[5] = -5720134;
-        weight[6] = 27585557;
-        weight[7] = -11946924;
-        weight[8] = 17072096;
+        weight[0] =  51796937;
+		weight[1] =  -40593016;
+		weight[2] =  43687913;
+		weight[3] =  55766463;
+		weight[4] =  -8397900;
+		weight[5] =  44529730;
+		weight[6] =  -53606200;
+		weight[7] =  23677492;
+		weight[8] =  -38560940;
     end
     
 endmodule

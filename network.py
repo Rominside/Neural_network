@@ -1,4 +1,5 @@
 import pandas as pd
+import json
 
 
 def act(num):
@@ -9,10 +10,11 @@ def act(num):
 
 
 class Neuron(object):
-    def __init__(self, childs, weight, porog):
+    def __init__(self, childs, weight, porog, layer):
         self.childs = childs
         self.weight = weight
         self.porog = porog
+        self.layer = layer
 
     def getout(self, input):
         out = 0
@@ -24,6 +26,9 @@ class Neuron(object):
             for i in range(len(self.childs)):
                 out += self.weight[i] * self.childs[i].getout(input)
             out = act(out + self.porog)
+
+        if self.layer == 1:
+            print(out)
 
         return out
 
@@ -52,7 +57,7 @@ def create_net():
         weights = []
         for j in range(9):
             weights.append(weight_layers[0][j][i])
-        layer_0.append(Neuron(childs=None, weight=weights, porog=0))
+        layer_0.append(Neuron(childs=None, weight=weights, porog=0, layer=0))
         print(weights)
 
     layer_1 = []
@@ -60,12 +65,12 @@ def create_net():
         weights = []
         for j in range(9):
             weights.append(weight_layers[1][j][i])
-        layer_1.append(Neuron(childs=layer_0, weight=weights, porog=0))
+        layer_1.append(Neuron(childs=layer_0, weight=weights, porog=0, layer=1))
 
     weights = []
     for i in weight_layers[2][0]:
         weights.append(i)
-    layer_2 = Neuron(childs=layer_1, weight=weights, porog=0)
+    layer_2 = Neuron(childs=layer_1, weight=weights, porog=0, layer=2)
 
     return layer_2
 

@@ -85,7 +85,7 @@ def generate_network(x_train, y_train, x_test, y_test):
     return classifier
 
 
-def save_network(classifier_):
+def save_network(classifier_, x_test, y_test):
     classifier_.save("model_1")
     classifier_loaded_ = keras.models.load_model("model_1")
     classifier_loaded_.evaluate(x_test, y_test)
@@ -97,4 +97,4 @@ if __name__ == "__main__":
     # создание, обучение и проверка модели
     classifier = generate_network(data["x_train"], data["y_train"], data["x_test"], data["y_test"])
     # сохранение модели
-    save_network(classifier)
+    save_network(classifier, data["x_test"], data["y_test"])

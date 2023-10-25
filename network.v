@@ -4,24 +4,24 @@ module Network (
     input clk,
     input start,
 //------INPUTS------
-    input wire signed [32:0] input_0,
-    input wire signed [32:0] input_1,
-    input wire signed [32:0] input_2,
-    input wire signed [32:0] input_3,
-    input wire signed [32:0] input_4,
-    input wire signed [32:0] input_5,
-    input wire signed [32:0] input_6,
-    input wire signed [32:0] input_7,
-    input wire signed [32:0] input_8,
+    input wire signed [99:0] input_0,
+    input wire signed [99:0] input_1,
+    input wire signed [99:0] input_2,
+    input wire signed [99:0] input_3,
+    input wire signed [99:0] input_4,
+    input wire signed [99:0] input_5,
+    input wire signed [99:0] input_6,
+    input wire signed [99:0] input_7,
+    input wire signed [99:0] input_8,
 //------OUTPUTS-----
-    output wire signed [33:0] out_2,
+    output wire signed [99:0] out_2,
     output wire end_2
 );
     //------LOGICS______
     genvar i;
     //--------------------Layer_0------------------------
     wire [8:0] end_0;
-    wire signed [32:0] out_0 [8:0];
+    wire signed [99:0] out_0 [8:0];
     reg signed [32:0] weight_0 [8:0][8:0];
 
     generate
@@ -37,7 +37,7 @@ module Network (
     endgenerate
     //--------------------Layer_1------------------------
     wire [8:0] end_1;
-    wire signed [32:0] out_1 [8:0];
+    wire signed [99:0] out_1 [8:0];
     reg signed [32:0] weight_1 [8:0][8:0];
 
     generate
@@ -240,6 +240,7 @@ module Network (
 		weight_0[8][6] =  24040818;
 		weight_0[8][7] =  11675864;
 		weight_0[8][8] =  20305991;
+
    end
 
 endmodule
